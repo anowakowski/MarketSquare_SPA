@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoticesComponent } from './notices.component';
-import { Routes, RouterModule } from '@angular/router';
-
-const routes: Routes = [
-  {path: '', component: NoticesComponent},
-  {path: '**', redirectTo: ''}
-];
+import { NoticesRoutingModule } from './notices-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    NoticesRoutingModule
   ],
   declarations: [NoticesComponent]
 })
