@@ -8,7 +8,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllUsers() {
-    this.httpClient.get<any>('http://localhost:5000/api/' + 'users/getAllUsers').toPromise().then(response => response);
+  getAllUsers(): Promise<any> {
+    return this.httpClient.get<any>('https://localhost:5001/api/users/getAllUsers').toPromise().then(response => response);
   }
 }
