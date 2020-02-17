@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-add-new-notices',
-  templateUrl: './add-new-notices.component.html',
-  styleUrls: ['./add-new-notices.component.css']
+  selector: "app-add-new-notices",
+  templateUrl: "./add-new-notices.component.html",
+  styleUrls: ["./add-new-notices.component.css"]
 })
 export class AddNewNoticesComponent implements OnInit {
+  public items = [
+    { display: "Pizza", value: 1 },
+    { display: "Pasta", value: 2 },
+    { display: "Parmesan", value: 3 }
+  ];
 
-  form = new FormGroup({
-    name: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-   });
-    constructor() { }
-  
-    get firstname(){
-      return this.form.get('firstName')
-    }
-    ngOnInit() {
-    }
-  
-    onSubmit(){
-      alert(JSON.stringify(this.form.value));
-    }
+  public addNewNoticesForm = new FormGroup({
+    name: new FormControl("", Validators.required),
+    description: new FormControl("", Validators.required)
+  });
+  constructor() {}
 
+  ngOnInit() {}
+
+  onSubmit() {
+    alert(JSON.stringify(this.addNewNoticesForm.value));
+  }
 }
