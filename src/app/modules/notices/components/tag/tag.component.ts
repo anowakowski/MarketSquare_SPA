@@ -9,6 +9,8 @@ export class TagComponent implements OnInit {
 
   @Input() public tagName: string;
 
+  public isChecked: boolean;
+
   constructor() { }
 
   ngOnInit() {
