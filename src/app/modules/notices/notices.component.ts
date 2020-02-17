@@ -19,4 +19,12 @@ export class NoticesComponent implements OnInit {
       console.log(JSON.stringify(users));
     });
   }
+
+  checked(tagName: string) {
+    console.log('Checked tag: ' + tagName);
+  }
+
+  unchecked(tagName: string) {
+    console.log('Unchecked tag: ' + tagName);
+  }
 }

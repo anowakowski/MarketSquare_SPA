@@ -53,10 +53,10 @@
 
       <div class="d-flex">
         <div class="p-4 align-self-start">
-          <app-tag [tagName]="'Food'"></app-tag>
+          <app-tag [tagName]="'Food'" (checked)="checked($event)" (unchecked)="unchecked($event)"></app-tag>
         </div>
         <div class="p-4 align-self-start">
-          <app-tag [tagName]="'Parking'"></app-tag>
+          <app-tag [tagName]="'Parking'" (checked)="checked($event)" (unchecked)="unchecked($event)"></app-tag>
         </div>
       </div>
 
