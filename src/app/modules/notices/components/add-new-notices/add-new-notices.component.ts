@@ -17,6 +17,7 @@ export class AddNewNoticesComponent implements OnInit {
     name: new FormControl("", Validators.required),
     description: new FormControl("", Validators.required)
   });
+
   constructor() {}
 
   ngOnInit() {}
