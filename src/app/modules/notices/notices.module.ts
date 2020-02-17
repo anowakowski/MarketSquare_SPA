@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NoticesComponent } from './notices.component';
 import { NoticesRoutingModule } from './notices-routing.module';
@@ -17,8 +15,7 @@ import { TagListComponent } from './components/tag-list/tag-list.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    NoticesRoutingModule,
-    TagInputModule
+    NoticesRoutingModule
   ],
   declarations: [
     NoticesComponent,
