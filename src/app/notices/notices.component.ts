@@ -12,4 +12,7 @@ export class NoticesComponent implements OnInit {
   ngOnInit() {
   }
 
+  selectedTagsChanged(selectedTags: string[]) {
+    console.log('Selected tags changed: ' + JSON.stringify(selectedTags));
+  }
 }
