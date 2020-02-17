@@ -17,10 +17,16 @@ export class NoticesComponent implements OnInit {
       const users = response;
     });
   }
+
   getAllNotices() {
     this.noticeService.getAllNotices().then(response => {
       const notices = response;
       console.log(notices);
     });
+  }
+  
+  selectedTagsChanged(currentTags: string[]) {
+    console.log('Tags changed: ' + JSON.stringify(currentTags));
+
   }
 }
