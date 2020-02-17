@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoticesComponent } from './notices.component';
 import { NoticesRoutingModule } from './notices-routing.module';
 import { AllNoticesListComponent } from './components/all-notices-list/all-notices-list.component';
+import { AddNewNoticesComponent } from './components/add-new-notices/add-new-notices.component';
 import { TagComponent } from './components/tag/tag.component';
 
 
@@ -11,6 +12,11 @@ import { TagComponent } from './components/tag/tag.component';
     CommonModule,
     NoticesRoutingModule
   ],
-  declarations: [NoticesComponent, AllNoticesListComponent, TagComponent]
+  declarations: [
+    NoticesComponent,
+    AllNoticesListComponent,
+    AddNewNoticesComponent,
+    TagComponent
+  ]
 })
 export class NoticesModule { }
