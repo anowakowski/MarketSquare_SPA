@@ -2,10 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Tag } from 'src/app/models/tag';
 
-export interface Fruit {
-  name: string;
-}
 @Component({
   selector: "app-add-new-notices",
   templateUrl: "./add-new-notices.component.html",
@@ -18,10 +16,11 @@ export class AddNewNoticesComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruits: Fruit[] = [
-    {name: 'Lemon'},
-    {name: 'Lime'},
-    {name: 'Apple'},
+
+  tags: Tag[] = [
+    { name: '#Food', id: 1 },
+    { name: '#Honey', id: 2 },
+    { name: '#Game', id: 3 },
   ];
 
   public addNewNoticesForm = new FormGroup({
@@ -42,22 +41,21 @@ export class AddNewNoticesComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push({name: value.trim()});
+      this.tags.push({name: value.trim(), id: 1});
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
+  remove(fruit: Tag): void {
+    const index = this.tags.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.tags.splice(index, 1);
     }
   }
+
 }
