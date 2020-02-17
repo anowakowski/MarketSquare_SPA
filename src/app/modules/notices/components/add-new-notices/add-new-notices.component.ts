@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-new-notices',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNewNoticesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  form = new FormGroup({
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+   });
+    constructor() { }
+  
+    get firstname(){
+      return this.form.get('firstName')
+    }
+    ngOnInit() {
+    }
+  
+    onSubmit(){
+      alert(JSON.stringify(this.form.value));
+    }
 
 }

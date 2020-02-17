@@ -1,9 +1,28 @@
 <div class="container">
   <div class="row">
-    <div style="width: 100%;" class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Added new Notices</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <div style="width:100%;">
+      <div class="jumbotron">
+        <h1 class="display-4">Add new notices</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+          <div class="form-group">
+            <input type="text"  class="form-control form-control-lg" placeholder="Add notices name" formControlName="name" [ngClass]="{'is-invalid':form.get('name').touched && form.get('name').invalid}" required />
+            <div class="invalid-feedback">
+              <div>Notices Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control form-control-lg" placeholder="Add notices description" formControlName="description" [ngClass]="{'is-invalid':form.get('description').touched && form.get('description').invalid}" required />
+            <div class="invalid-feedback">
+              <div>Notices description is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary"  [disabled]="!form.valid">submit new notices</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
