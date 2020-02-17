@@ -51,7 +51,7 @@
 
       <a class="btn btn-primary" (click)="getAllUsers()">GetAllUsers</a>
 
-      <app-tag-list></app-tag-list>
+      <app-tag-list (selectionChanged)="selectedTagsChanged($event)"></app-tag-list>
 
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
