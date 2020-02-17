@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'notices',
+    path: '',
     loadChildren: '../app/notices/notices.module#NoticesModule'
-  }
+  },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
