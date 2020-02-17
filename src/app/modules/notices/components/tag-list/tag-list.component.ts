@@ -7,16 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TagListComponent implements OnInit {
 
+  private selectedTags: string[] = [];
+
   constructor() { }
 
   ngOnInit() {
   }
 
   checked(tagName: string) {
-    console.log('Checked tag: ' + tagName);
+    this.selectedTags.push(tagName);
   }
 
   unchecked(tagName: string) {
-    console.log('Unchecked tag: ' + tagName);
+    const index: number = this.selectedTags.indexOf(tagName, 0);
+    if (index > -1) {
+      this.selectedTags.splice(index, 1);
+    }
   }
 }
