@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-notices',
@@ -8,14 +7,9 @@ import { UserService } from '../../services/user.service';
 })
 export class NoticesComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  getAllUsers() {
-    this.userService.getAllUsers().then(response => {
-      const users = response;
-    });
-  }
 }

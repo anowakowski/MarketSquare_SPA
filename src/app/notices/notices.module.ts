@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NoticesRoutingModule } from './notices-routing.module';
-import { UserService } from 'src/app/services/user.service';
 import { NoticesComponent } from './notices.component';
-
+import { NoticesRoutingModule } from './notices-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     NoticesRoutingModule
   ],
-  declarations: [NoticesComponent],
-  providers: [
-    UserService
-  ]
+  declarations: [NoticesComponent]
 })
 export class NoticesModule { }
