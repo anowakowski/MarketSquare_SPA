@@ -7,6 +7,7 @@ import { NoticesRoutingModule } from './notices-routing.module';
 import { AllNoticesListComponent } from './components/all-notices-list/all-notices-list.component';
 import { AddNewNoticesComponent } from './components/add-new-notices/add-new-notices.component';
 import { TagComponent } from './components/tag/tag.component';
+import { TagListComponent } from './components/tag-list/tag-list.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { TagComponent } from './components/tag/tag.component';
     NoticesComponent,
     AllNoticesListComponent,
     AddNewNoticesComponent,
-    TagComponent
+    TagComponent,
+    TagListComponent
   ]
 })
 export class NoticesModule { }
