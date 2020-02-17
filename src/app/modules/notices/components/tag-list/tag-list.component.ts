@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { TagService } from 'src/app/services/tag.service';
 
 @Component({
   selector: 'app-tag-list',
@@ -11,9 +12,12 @@ export class TagListComponent implements OnInit {
 
   @Output() selectionChanged = new EventEmitter<string[]>();
 
-  constructor() { }
+  public availableTags: string[] = [];
+
+  constructor(private tagService: TagService) { }
 
   ngOnInit() {
+    this.tagService.getAllTags().then(tags => this.availableTags = tags);
   }
 
   checked(tagName: string) {
