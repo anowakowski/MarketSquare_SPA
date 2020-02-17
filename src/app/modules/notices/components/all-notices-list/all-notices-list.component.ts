@@ -23,7 +23,7 @@ export class AllNoticesListComponent implements OnInit {
         description: "I need a lof of nice honey to produce alkohol",
         creatorName: "Justyna Kowalska",
         creationDate: new Date("1/16/2020"),
-        tags: ["food","honey","buy"]
+        tags: ["food", "honey", "buy"]
       },
       {
         id: 2,
@@ -31,7 +31,7 @@ export class AllNoticesListComponent implements OnInit {
         description: "I have honey from my grandpartes, they live in small village",
         creatorName: "Adam Nowak",
         creationDate: new Date("10/19/2019"),
-        tags: ["food","honey","sell"]
+        tags: ["food", "honey", "sell"]
       },
       {
         id: 3,
@@ -39,21 +39,21 @@ export class AllNoticesListComponent implements OnInit {
         description: "Very pretty and well painted bike",
         creatorName: "Jan Jarząbek",
         creationDate: new Date("1/23/2020"),
-        tags: ["bicycle","sell"]
+        tags: ["bicycle", "sell"]
       }
     ];
   }
   formatDate(date) {
-  var monthNames = [
+  const monthNames = [
     "January", "February", "March",
     "April", "May", "June", "July",
     "August", "September", "October",
     "November", "December"
   ];
 
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
 
   return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
