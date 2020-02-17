@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NoticesRoutingModule } from './notices-routing.module';
-import { UserService } from 'src/app/services/user.service';
 import { NoticesComponent } from './notices.component';
+import { NoticesRoutingModule } from './notices-routing.module';
+import { AllNoticesListComponent } from './components/all-notices-list/all-notices-list.component';
+import { AddNewNoticesComponent } from './components/add-new-notices/add-new-notices.component';
 import { TagComponent } from './components/tag/tag.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
 
@@ -12,9 +13,12 @@ import { TagListComponent } from './components/tag-list/tag-list.component';
     CommonModule,
     NoticesRoutingModule
   ],
-  declarations: [NoticesComponent, TagComponent, TagListComponent],
-  providers: [
-    UserService
+  declarations: [
+    NoticesComponent,
+    AllNoticesListComponent,
+    AddNewNoticesComponent,
+    TagComponent,
+    TagListComponent
   ]
 })
 export class NoticesModule { }
