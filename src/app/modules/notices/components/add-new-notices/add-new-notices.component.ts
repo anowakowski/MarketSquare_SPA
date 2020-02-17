@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { Tag } from 'src/app/models/tag';
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { Tag } from "src/app/models/tag";
+import { TagService } from 'src/app/services/tag.service';
 
 @Component({
   selector: "app-add-new-notices",
@@ -10,7 +11,6 @@ import { Tag } from 'src/app/models/tag';
   styleUrls: ["./add-new-notices.component.css"]
 })
 export class AddNewNoticesComponent implements OnInit {
-
   visible = true;
   selectable = true;
   removable = true;
@@ -18,9 +18,9 @@ export class AddNewNoticesComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   tags: Tag[] = [
-    { name: '#Food', id: 1 },
-    { name: '#Honey', id: 2 },
-    { name: '#Game', id: 3 },
+    { name: "#Food", id: 1 },
+    { name: "#Honey", id: 2 },
+    { name: "#Game", id: 3 }
   ];
 
   public addNewNoticesForm = new FormGroup({
@@ -33,24 +33,25 @@ export class AddNewNoticesComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    alert(JSON.stringify(this.addNewNoticesForm.value));
+    if (this.addNewNoticesForm.valid && this.tagsAreNoEmpty()) {
+      alert(JSON.stringify(this.addNewNoticesForm.value));
+    }
   }
 
-
-  add(event: MatChipInputEvent): void {
+  addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
-    if ((value || '').trim()) {
-      this.tags.push({name: value.trim(), id: 1});
+    if ((value || "").trim()) {
+      this.tags.push({ name: value.trim(), id: 1 });
     }
 
     if (input) {
-      input.value = '';
+      input.value = "";
     }
   }
 
-  remove(fruit: Tag): void {
+  removeTag(fruit: Tag): void {
     const index = this.tags.indexOf(fruit);
 
     if (index >= 0) {
@@ -58,4 +59,11 @@ export class AddNewNoticesComponent implements OnInit {
     }
   }
 
+  tagsAreNoEmpty(): boolean {
+    return this.tags.length > 0;
+  }
+
+  submitDisabled(): boolean {
+    return !this.addNewNoticesForm.valid;
+  }
 }

@@ -18,3 +18,13 @@
 .jumbotron {
   background-color: #9aa5b1c9;
 }
+
+.invalid-feedback {
+  color: #f0505f;
+}
+
+.invalid-feedback-tags {
+  font-size: 80%;
+  margin-top: 5px;
+  color: #f0505f;
+}
