@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-new-notices',
@@ -8,25 +8,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddNewNoticesComponent implements OnInit {
 
-  addNewNoticesForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit() {
-    this.createaddNewNoticesForm();
-  }
-
-  createaddNewNoticesForm() {
-    this.addNewNoticesForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.email]],
-      description: ['', Validators.required],
-      tags: ['']
-    });
-  }
-
-  addNewNotices() {
-    if (this.addNewNoticesForm.valid) {
-
+  form = new FormGroup({
+    name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+   });
+    constructor() { }
+  
+    get firstname(){
+      return this.form.get('firstName')
     }
-  }
+    ngOnInit() {
+    }
+  
+    onSubmit(){
+      alert(JSON.stringify(this.form.value));
+    }
 
 }
