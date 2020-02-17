@@ -8,6 +8,7 @@ import { AllNoticesListComponent } from './components/all-notices-list/all-notic
 import { AddNewNoticesComponent } from './components/add-new-notices/add-new-notices.component';
 import { TagComponent } from './components/tag/tag.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
+import { NoticeService } from './services/notice.service';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { TagListComponent } from './components/tag-list/tag-list.component';
     AddNewNoticesComponent,
     TagComponent,
     TagListComponent
-  ]
+  ],
+  providers: [NoticeService]
 })
 export class NoticesModule { }
