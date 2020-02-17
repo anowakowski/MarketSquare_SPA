@@ -10,7 +10,7 @@ export class NoticeService {
 
   getAllNotices(): Promise<any> {
     return this.httpClient
-      .get<any>("https://localhost:5001/api/users/getAllNotices")
+      .get<any>("https://localhost:5001/api/notices/getAllNotices")
       .toPromise()
       .then(response => response);
   }

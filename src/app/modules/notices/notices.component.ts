@@ -24,7 +24,7 @@ export class NoticesComponent implements OnInit {
       console.log(notices);
     });
   }
-  
+
   selectedTagsChanged(currentTags: string[]) {
     console.log('Tags changed: ' + JSON.stringify(currentTags));
 
