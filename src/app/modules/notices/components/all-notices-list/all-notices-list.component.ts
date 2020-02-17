@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Notice } from "src/app/models/Notice";
+import { NoticeService } from '../../services/notice.service';
 
 @Component({
   selector: "app-all-notices-list",
@@ -8,12 +9,19 @@ import { Notice } from "src/app/models/Notice";
 })
 export class AllNoticesListComponent implements OnInit {
   notices: Notice[];
-  constructor() {
+  constructor(private noticeService: NoticeService) {
     this.fillNotices();
   }
 
   ngOnInit() {
+    this.getAllNotices();
+  }
 
+  getAllNotices() {
+    this.noticeService.getAllNotices().then(response => {
+      const notices = response;
+      console.log(notices);
+    });
   }
   fillNotices() {
     this.notices = [
