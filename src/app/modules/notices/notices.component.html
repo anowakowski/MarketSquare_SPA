@@ -51,6 +51,15 @@
 
       <a class="btn btn-primary" (click)="getAllUsers()">GetAllUsers</a>
 
+      <div class="d-flex">
+        <div class="p-4 align-self-start">
+          <app-tag [tagName]="'Food'"></app-tag>
+        </div>
+        <div class="p-4 align-self-start">
+          <app-tag [tagName]="'Parking'"></app-tag>
+        </div>
+      </div>
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown button

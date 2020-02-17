@@ -16,6 +16,7 @@ export class NoticesComponent implements OnInit {
   getAllUsers() {
     this.userService.getAllUsers().then(response => {
       const users = response;
+      console.log(JSON.stringify(users));
     });
   }
 }

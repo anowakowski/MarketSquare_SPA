@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoticesRoutingModule } from './notices-routing.module';
 import { UserService } from 'src/app/services/user.service';
 import { NoticesComponent } from './notices.component';
+import { TagComponent } from './components/tag/tag.component';
 
 
 @NgModule({
@@ -10,7 +11,7 @@ import { NoticesComponent } from './notices.component';
     CommonModule,
     NoticesRoutingModule
   ],
-  declarations: [NoticesComponent],
+  declarations: [NoticesComponent, TagComponent],
   providers: [
     UserService
   ]
