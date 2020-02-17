@@ -5,7 +5,7 @@
           <button class="btn btn-link" type="button" data-toggle="collapse" attr.data-target="#collapse{{RowIndex}}" attr.aria-controls="collapse{{RowIndex}}" >
             {{notice.name}}
             <span class="list-tag" *ngFor="let tag of notice.tags; let RowIndex = index"> 
-              #{{tag}}
+              #{{tag.name}}
             </span>
           </button>
         </h2>
