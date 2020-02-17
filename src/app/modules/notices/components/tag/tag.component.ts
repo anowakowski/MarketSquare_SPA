@@ -13,7 +13,7 @@ export class TagComponent implements OnInit {
 
   @Output() public unchecked = new EventEmitter<string>();
 
-  private isChecked: boolean = false;
+  private isChecked = false;
 
   constructor() { }
 
@@ -25,8 +25,7 @@ export class TagComponent implements OnInit {
 
     if (this.isChecked) {
       this.checked.emit(this.tagName);
-    }
-    else {
+    } else {
       this.unchecked.emit(this.tagName);
     }
   }
