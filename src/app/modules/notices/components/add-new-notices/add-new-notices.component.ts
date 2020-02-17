@@ -7,11 +7,6 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./add-new-notices.component.css"]
 })
 export class AddNewNoticesComponent implements OnInit {
-  public items = [
-    { display: "Pizza", value: 1 },
-    { display: "Pasta", value: 2 },
-    { display: "Parmesan", value: 3 }
-  ];
 
   public addNewNoticesForm = new FormGroup({
     name: new FormControl("", Validators.required),
