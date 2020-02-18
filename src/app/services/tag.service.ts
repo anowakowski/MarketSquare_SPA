@@ -15,4 +15,11 @@ export class TagService {
       .toPromise()
       .then(response => response);
   }
+
+  getTagsByName(name: string): Promise<Tag[]> {
+    return this.httpClient
+      .get<Tag[]>(`https://localhost:5001/api/tags/getTagsByName/?name=${name}`)
+      .toPromise()
+      .then(response => response);
+  }
 }

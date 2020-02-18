@@ -1,17 +1,19 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Tag } from "src/app/models/tag";
 import { TagService } from 'src/app/services/tag.service';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { Observable, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: "app-add-new-notices",
   templateUrl: "./add-new-notices.component.html",
   styleUrls: ["./add-new-notices.component.css"]
 })
-export class AddNewNoticesComponent implements OnInit {
+export class AddNewNoticesComponent implements OnInit, OnDestroy {
   visible = true;
   selectable = true;
   removable = true;
@@ -35,11 +37,20 @@ export class AddNewNoticesComponent implements OnInit {
 
   @ViewChild('tagInput', { static: false }) tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('autocomplete', { static: false }) autocomplete: MatAutocomplete;
+  subscription: Subscription;
 
-  constructor(private tagService: TagService) {}
+  constructor(private tagService: TagService) {
+  }
 
   ngOnInit() {
     this.tagService.getAllTags().then(tags => this.availableTags = tags);
+    this.subscription = this.tagControl.valueChanges.subscribe((value: string) => {
+      this.tagService.getTagsByName(value).then(tags => this.availableTags = tags);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onSubmit() {
@@ -49,9 +60,6 @@ export class AddNewNoticesComponent implements OnInit {
   }
 
   addTag(event: MatChipInputEvent): void {
-    console.log("addTag ");
-    console.log(event);
-
     const input = event.input;
     const value = event.value;
 
@@ -75,9 +83,6 @@ export class AddNewNoticesComponent implements OnInit {
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent) {
-    console.log("optionSelected ");
-    console.log(event);
-
     this.tags.push(event.option.value);
     this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
