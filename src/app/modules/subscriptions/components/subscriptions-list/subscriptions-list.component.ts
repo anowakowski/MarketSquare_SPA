@@ -17,9 +17,9 @@ export class SubscriptionsListComponent implements OnInit {
 
   getSubscribedNotices(){
       this.subscriptionService.getSubscribedNotices().then(response => {
-        if(response && response[0] &&  response[0].notice){
-          this.notices = response[0].notice;
-          console.log("elo");
+        if(response && response.length > 0){
+          this.notices = response.map(o => o.notice);
+          console.log(this.notices);
         }
       });
   }

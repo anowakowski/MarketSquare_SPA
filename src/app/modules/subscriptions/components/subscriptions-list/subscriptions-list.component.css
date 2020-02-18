@@ -1,0 +1,25 @@
+.notices-list{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.list-tag{
+    margin-left: 10px;
+    color: black;
+}
+
+.card {
+    background-color: #40b4ec;
+}
+
+.btn-link {
+    color: #111111;
+    font-weight: bold;
+}
+
+.list-tag {
+    color: #51435d;
+}
+
+.card-description {
+    background-color: #3596c7;
+}
