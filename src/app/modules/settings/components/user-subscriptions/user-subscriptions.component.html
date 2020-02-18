@@ -1,63 +1,40 @@
-<h5>Subscribed users:</h5>
-
-
-<div class="panel panel-primary">
-    <div class="panel-heading">Subscribe user:</div>
-    <div class="panel-body">
-
-
-        <form (submit)="subscribeUser()">
-            <div class="form-group-sm row">
-        
-                <label class="col-sm-4 col-form-label-sm">Name</label>
-        
-                <input type="text" #subscribeNameInput class="form-control form-control-sm col-sm-2"/>        
-                
-            </div>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">Add</button>
-            
-        </form>
-
-    </div>
-  </div>
-
-  <div *ngFor="let item of subscribedUsers">
-    <form (submit)="unsubscribeUser(item)">
-        <div class="form-group-sm row">
-            <label class="col-sm-4 col-form-label-sm">{{item}}</label>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">x</button>
+<div class="jumbotron">
+    <h5>Subscribed users:</h5>
+    
+    <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipListSubscribeUser aria-label="Users selection">
+          <mat-chip *ngFor="let user of subscribedUsers" [selectable]="selectable"
+                   [removable]="removable" (removed)="removeSubscribedUser(user)">
+            {{user}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder=""
+                 [matChipInputFor]="chipListSubscribeUser"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="addSubscribedUser($event)">
+        </mat-chip-list>
+        <div>
         </div>
-    </form>
-  </div>
-
-<h5>Blacklisted users:</h5>
-
-<div class="panel panel-primary">
-    <div class="panel-heading">Blacklist user:</div>
-    <div class="panel-body">
-
-
-        <form (submit)="blacklistUser()">
-            <div class="form-group-sm row">
-        
-                <label class="col-sm-4 col-form-label-sm">Name</label>
-        
-                <input type="text" #blacklistNameInput class="form-control form-control-sm col-sm-2"/>        
-                
-            </div>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">Add</button>
-            
-        </form>
-
-    </div>
-  </div>
-
-  <div *ngFor="let item of blacklistedUsers">
-
-    <form (submit)="unblacklistUser(item)">
-        <div class="form-group-sm row">
-            <label class="col-sm-4 col-form-label-sm">{{item}}</label>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">x</button>
+    </mat-form-field>
+    
+    <h5>Blacklisted users:</h5>
+    <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipListBlacklistUser aria-label="Users selection">
+          <mat-chip *ngFor="let user of blacklistedUsers" [selectable]="selectable"
+                   [removable]="removable" (removed)="removeBlacklistedUser(user)">
+            {{user}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder=""
+                 [matChipInputFor]="chipListBlacklistUser"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="addBlacklistedUser($event)">
+        </mat-chip-list>
+        <div>
         </div>
-    </form>
-  </div>
+    </mat-form-field>
+    
+    </div>
+    

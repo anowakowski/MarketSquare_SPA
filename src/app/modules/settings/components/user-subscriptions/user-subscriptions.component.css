@@ -1,0 +1,31 @@
+.example-chip-list {
+    width: 100%;
+  }
+  
+  .mat-chip.mat-standard-chip {
+    background-color: #45b3c7;
+    color: #111111;
+  }
+  
+  .mat-chip.mat-standard-chip::after {
+    color: black;
+  }
+  
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: rgba(129, 21, 21, 0.7);
+  }
+  
+  .jumbotron {
+    background-color: #9aa5b1c9;
+  }
+  
+  .invalid-feedback {
+    color: #f0505f;
+  }
+  
+  .invalid-feedback-tags {
+    font-size: 80%;
+    margin-top: 5px;
+    color: #f0505f;
+  }
+  

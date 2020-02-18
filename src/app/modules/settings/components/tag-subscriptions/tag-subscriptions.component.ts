@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { SettingsService } from '../../services/settings.service';
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { MatChipInputEvent } from "@angular/material/chips";
 
 @Component({
   selector: 'app-tag-subscriptions',
@@ -7,6 +9,12 @@ import { SettingsService } from '../../services/settings.service';
   styleUrls: ['./tag-subscriptions.component.css']
 })
 export class TagSubscriptionsComponent implements OnInit {
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   subscribedTags: string[];
   blacklistedTags: string[];
@@ -20,21 +28,67 @@ export class TagSubscriptionsComponent implements OnInit {
     this.refresh();
   }
 
+  addSubscribedTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.subscribedTags.push(value.trim());
+      this.subscribeTag(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+  }
+
+  removeSubscribedTag(tag: string): void {
+    const index = this.subscribedTags.indexOf(tag);
+
+    if (index >= 0) {
+      this.subscribedTags.splice(index, 1);
+    }
+
+    this.unsubscribeTag(tag);
+  }
+
+  addBlacklistedTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      this.blacklistedTags.push(value.trim());
+      this.blacklistTag(value.trim());
+    }
+
+    if (input) {
+      input.value = "";
+    }
+  }
+
+  removeBlacklistedTag(tag: string): void {
+    const index = this.blacklistedTags.indexOf(tag);
+
+    if (index >= 0) {
+      this.blacklistedTags.splice(index, 1);
+    }
+
+    this.unblacklistTag(tag);
+  }
+
   refresh() {
     this.getBlacklistedTags();
     this.getSubscribedTags();
   }
 
-  subscribeTag() {
-    const subscribedTag = this.subscribeNameInput.nativeElement.value;
-    this.settingsService.subscribeTag(subscribedTag).then(response => {
+  subscribeTag(tag: string) {
+    this.settingsService.subscribeTag(tag).then(response => {
       this.refresh();
     });
   }
 
-  blacklistTag() {
-    const subscribedTag = this.blacklistNameInput.nativeElement.value;
-    this.settingsService.blacklistTag(subscribedTag).then(response => {
+  blacklistTag(tag: string) {
+    this.settingsService.blacklistTag(tag).then(response => {
       this.refresh();
     });
   }
