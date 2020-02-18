@@ -16,7 +16,7 @@
                 (matChipInputTokenEnd)="addSubscribedUser($event)">
         </mat-chip-list>
         <mat-autocomplete #autoSubscribeUser="matAutocomplete" (optionSelected)="selectedSubscribedUser($event)">
-			<mat-option *ngFor="let user of allUsers" [value]="user">
+			<mat-option *ngFor="let user of filteredUsers" [value]="user">
 				{{user}}
 			</mat-option>
 		</mat-autocomplete>
@@ -40,7 +40,7 @@
                 (matChipInputTokenEnd)="addBlacklistedUser($event)">
         </mat-chip-list>
 		<mat-autocomplete #autoBlacklistUser="matAutocomplete" (optionSelected)="selectedBlacklistedUser($event)">
-			<mat-option *ngFor="let user of allUsers" [value]="user">
+			<mat-option *ngFor="let user of filteredUsers" [value]="user">
 				{{user}}
 			</mat-option>
 		</mat-autocomplete>

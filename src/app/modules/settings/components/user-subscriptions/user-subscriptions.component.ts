@@ -23,7 +23,7 @@ export class UserSubscriptionsComponent implements OnInit {
   blacklistedUsers: string[];
 
   allUsers: string[];
-  filteredUsers: Observable<string[]>;
+  filteredUsers: string[];
 
   @ViewChild('subscribeNameInput', {static: false}) subscribeNameInput: ElementRef;
   @ViewChild('blacklistNameInput', {static: false}) blacklistNameInput: ElementRef;
@@ -40,8 +40,15 @@ export class UserSubscriptionsComponent implements OnInit {
     this.getAllUsers();
   }
 
+  refreshFiltered() {
+    this.filteredUsers = this.allUsers.filter(n => !this.subscribedUsers.includes(n) && !this.blacklistedUsers.includes(n));
+  }
+
   getAllUsers() {
-    this.allUsers = ['kamil', 'Wojciech'];
+    this.settingsService.getAllUsers().then(response => {
+      this.allUsers = response.map(u => u.username);
+      this.refreshFiltered();
+    });
  }
 
   addSubscribedUser(event: MatChipInputEvent): void {
@@ -50,7 +57,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
     if ((value || "").trim()) {
       const v = value.trim();
-      if (this.allUsers.indexOf(v) > -1 && this.blacklistedUsers.indexOf(v) < 0 && this.subscribedUsers.indexOf(v) < 0) {
+      if (this.filteredUsers.indexOf(v) > -1) {
         this.subscribedUsers.push(v);
         this.subscribeUser(v);
       } else {
@@ -79,7 +86,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
     if ((value || "").trim()) {
       const v = value.trim();
-      if (this.allUsers.indexOf(v) > -1 && this.blacklistedUsers.indexOf(v) < 0 && this.subscribedUsers.indexOf(v) < 0) {
+      if (this.filteredUsers.indexOf(v) > -1) {
         this.blacklistedUsers.push(v);
         this.blacklistUser(v);
       } else {
@@ -133,12 +140,14 @@ export class UserSubscriptionsComponent implements OnInit {
   getSubscribedUsers() {
     this.settingsService.getSubscribedUsers().then(response => {
       this.subscribedUsers = response;
+      this.refreshFiltered();
     });
   }
 
   getBlacklistedUsers() {
     this.settingsService.getBlacklistedUsers().then(response => {
       this.blacklistedUsers = response;
+      this.refreshFiltered();
     });
   }
 

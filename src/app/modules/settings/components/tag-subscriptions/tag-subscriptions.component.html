@@ -16,7 +16,7 @@
             (matChipInputTokenEnd)="addSubscribedTag($event)">
     </mat-chip-list>
     <mat-autocomplete #autoSubscribeTag="matAutocomplete" (optionSelected)="selectedSubscribedTag($event)">
-        <mat-option *ngFor="let tag of allTags" [value]="tag">
+        <mat-option *ngFor="let tag of filteredTags" [value]="tag">
             {{tag}}
         </mat-option>
     </mat-autocomplete>
@@ -40,7 +40,7 @@
             (matChipInputTokenEnd)="addBlacklistedTag($event)">
     </mat-chip-list>
     <mat-autocomplete #autoBlacklistTag="matAutocomplete" (optionSelected)="selectedBlacklistedTag($event)">
-        <mat-option *ngFor="let tag of allTags" [value]="tag">
+        <mat-option *ngFor="let tag of filteredTags" [value]="tag">
             {{tag}}
         </mat-option>
     </mat-autocomplete>
