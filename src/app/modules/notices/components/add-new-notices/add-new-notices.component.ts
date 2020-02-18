@@ -33,7 +33,7 @@ export class AddNewNoticesComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    if (this.addNewNoticesForm.valid && this.tagsAreNoEmpty()) {
+    if (this.addNewNoticesForm.valid && this.tagsAreNotEmpty()) {
       alert(JSON.stringify(this.addNewNoticesForm.value));
     }
   }
@@ -59,7 +59,7 @@ export class AddNewNoticesComponent implements OnInit {
     }
   }
 
-  tagsAreNoEmpty(): boolean {
+  tagsAreNotEmpty(): boolean {
     return this.tags.length > 0;
   }
 
