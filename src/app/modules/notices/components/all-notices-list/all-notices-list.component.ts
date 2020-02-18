@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Notice } from "src/app/models/notice";
+
 import { NoticeService } from '../../services/notice.service';
+import { Notice } from 'src/app/models/Notice';
 
 @Component({
   selector: "app-all-notices-list",

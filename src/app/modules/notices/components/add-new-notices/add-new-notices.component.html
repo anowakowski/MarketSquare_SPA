@@ -18,15 +18,33 @@
               <div>Notices description is required</div>
             </div>
           </div>
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList aria-label="Tags selection">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                       [removable]="removable" (removed)="removeTag(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New Tags..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="addTag($event)">
+            </mat-chip-list>
+            <div>
+              <div *ngIf="tagsAreNoEmpty() === false" class="invalid-feedback-tags">Notices Tags is required</div>
+            </div>
+          </mat-form-field>
 
- 
-
-
-          <div class="form-group">
-            <button class="btn btn-primary"  [disabled]="!addNewNoticesForm.valid">submit new notices</button>
+          <div class="form-group" style="margin-top: 20px;">
+            <button class="btn btn-primary btn-lg btn-block" [disabled]="submitDisabled()">submit new notices</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block" style="margin-top: 10px;">Cancel</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+
+

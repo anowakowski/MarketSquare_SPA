@@ -9,6 +9,7 @@ import { AddNewNoticesComponent } from './components/add-new-notices/add-new-not
 import { TagComponent } from './components/tag/tag.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
 import { NoticeService } from './services/notice.service';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NoticeService } from './services/notice.service';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    NoticesRoutingModule
+    NoticesRoutingModule,
+    MaterialModule
   ],
   declarations: [
     NoticesComponent,
