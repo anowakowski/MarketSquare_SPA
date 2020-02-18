@@ -41,7 +41,9 @@ export class UserSubscriptionsComponent implements OnInit {
   }
 
   refreshFiltered() {
-    this.filteredUsers = this.allUsers.filter(n => !this.subscribedUsers.includes(n) && !this.blacklistedUsers.includes(n));
+    if (this.allUsers !== undefined && this.subscribedUsers !== undefined && this.blacklistedUsers !== undefined) {
+      this.filteredUsers = this.allUsers.filter(n => !this.subscribedUsers.includes(n) && !this.blacklistedUsers.includes(n));
+    }
   }
 
   getAllUsers() {
@@ -58,8 +60,9 @@ export class UserSubscriptionsComponent implements OnInit {
     if ((value || "").trim()) {
       const v = value.trim();
       if (this.filteredUsers.indexOf(v) > -1) {
-        this.subscribedUsers.push(v);
         this.subscribeUser(v);
+        this.subscribedUsers.push(v);        
+        this.refreshFiltered();
       } else {
         input.value = "";
       }
@@ -87,8 +90,9 @@ export class UserSubscriptionsComponent implements OnInit {
     if ((value || "").trim()) {
       const v = value.trim();
       if (this.filteredUsers.indexOf(v) > -1) {
-        this.blacklistedUsers.push(v);
         this.blacklistUser(v);
+        this.blacklistedUsers.push(v);
+        this.refreshFiltered();
       } else {
         input.value = "";
       }

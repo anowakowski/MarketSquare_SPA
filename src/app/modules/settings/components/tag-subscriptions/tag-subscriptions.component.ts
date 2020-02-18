@@ -42,7 +42,9 @@ export class TagSubscriptionsComponent implements OnInit {
   }
 
   refreshFiltered() {
-    this.filteredTags = this.allTags.filter(n => !this.subscribedTags.includes(n) && !this.blacklistedTags.includes(n));
+    if (this.allTags !== undefined && this.subscribedTags !== undefined && this.blacklistedTags !== undefined) {
+      this.filteredTags = this.allTags.filter(n => !this.subscribedTags.includes(n) && !this.blacklistedTags.includes(n));
+    }
   }
 
   getAllTags() {
@@ -59,8 +61,9 @@ export class TagSubscriptionsComponent implements OnInit {
     if ((value || "").trim()) {
       const v = value.trim();
       if (this.filteredTags.indexOf(v) > -1) {
-        this.subscribedTags.push(v);
         this.subscribeTag(v);
+        this.subscribedTags.push(v);        
+        this.refreshFiltered();
       } else {
         input.value = "";
       }
@@ -88,8 +91,9 @@ export class TagSubscriptionsComponent implements OnInit {
     if ((value || "").trim()) {
       const v = value.trim();
       if (this.filteredTags.indexOf(v) > -1) {
-        this.blacklistedTags.push(v);
         this.blacklistTag(v);
+        this.blacklistedTags.push(v);
+        this.refreshFiltered();
       } else {
         input.value = "";
       }
