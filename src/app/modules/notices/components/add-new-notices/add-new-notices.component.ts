@@ -6,6 +6,7 @@ import { Tag } from "src/app/models/tag";
 import { TagService } from 'src/app/services/tag.service';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { Subscription } from 'rxjs';
+import { NoticeService } from '../../services/notice.service';
 
 @Component({
   selector: "app-add-new-notices",
@@ -34,7 +35,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   @ViewChild('autocomplete', { static: false }) autocomplete: MatAutocomplete;
   subscription: Subscription;
 
-  constructor(private tagService: TagService) {
+  constructor(private tagService: TagService, private noticeService: NoticeService) {
   }
 
   ngOnInit() {
@@ -53,7 +54,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     if (this.addNewNoticesForm.valid && this.tagsAreNotEmpty()) {
       const formValue = this.addNewNoticesForm.value;
       formValue.tags = this.tags;
-      alert(JSON.stringify(formValue));
+      this.noticeService.addNotice(formValue);
     }
   }
 
