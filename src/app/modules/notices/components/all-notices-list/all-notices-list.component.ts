@@ -33,6 +33,7 @@ export class AllNoticesListComponent implements OnInit {
 
   handleIncomingTags(incomingTags: Tag[]) {
     this.selectedTags = incomingTags;
+    console.log(`I've recieved ${this.selectedTags}`);
   }
 
   fillNotices() {
