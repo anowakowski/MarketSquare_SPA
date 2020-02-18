@@ -9,11 +9,17 @@
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
       <input placeholder="..."
-             [matChipInputFor]="chipListSubscribeTag"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="addSubscribedTag($event)">
+            [matAutocomplete]="autoSubscribeTag"
+            [matChipInputFor]="chipListSubscribeTag"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addSubscribedTag($event)">
     </mat-chip-list>
+    <mat-autocomplete #autoSubscribeTag="matAutocomplete" (optionSelected)="selectedSubscribedTag($event)">
+        <mat-option *ngFor="let tag of allTags" [value]="tag">
+            {{tag}}
+        </mat-option>
+    </mat-autocomplete>
     <div>
     </div>
 </mat-form-field>
@@ -27,11 +33,17 @@
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
       <input placeholder="..."
-             [matChipInputFor]="chipListBlacklistTag"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="addBlacklistedTag($event)">
+            [matAutocomplete]="autoBlacklistTag"
+            [matChipInputFor]="chipListBlacklistTag"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addBlacklistedTag($event)">
     </mat-chip-list>
+    <mat-autocomplete #autoBlacklistTag="matAutocomplete" (optionSelected)="selectedBlacklistedTag($event)">
+        <mat-option *ngFor="let tag of allTags" [value]="tag">
+            {{tag}}
+        </mat-option>
+    </mat-autocomplete>
     <div>
     </div>
 </mat-form-field>

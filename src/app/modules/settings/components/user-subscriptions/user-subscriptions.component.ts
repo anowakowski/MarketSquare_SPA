@@ -50,7 +50,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
     if ((value || "").trim()) {
       const v = value.trim();
-      if (this.allUsers.indexOf(v) > -1) {
+      if (this.allUsers.indexOf(v) > -1 && this.blacklistedUsers.indexOf(v) < 0 && this.subscribedUsers.indexOf(v) < 0) {
         this.subscribedUsers.push(v);
         this.subscribeUser(v);
       } else {
@@ -79,7 +79,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
     if ((value || "").trim()) {
       const v = value.trim();
-      if (this.allUsers.indexOf(v) > -1) {
+      if (this.allUsers.indexOf(v) > -1 && this.blacklistedUsers.indexOf(v) < 0 && this.subscribedUsers.indexOf(v) < 0) {
         this.blacklistedUsers.push(v);
         this.blacklistUser(v);
       } else {
@@ -103,15 +103,19 @@ export class UserSubscriptionsComponent implements OnInit {
   }
 
   subscribeUser(user: string) {
-    this.settingsService.subscribeUser(user).then(response => {
-      this.refresh();
-    });
+    if (this.blacklistedUsers.indexOf(user) < 0 && this.subscribedUsers.indexOf(user) < 0) {
+      this.settingsService.subscribeUser(user).then(response => {
+        this.refresh();
+      });
+    }
   }
 
   blacklistUser(user: string) {
-    this.settingsService.blacklistUser(user).then(response => {
-      this.refresh();
-    });
+    if (this.blacklistedUsers.indexOf(user) < 0 && this.subscribedUsers.indexOf(user) < 0) {
+      this.settingsService.blacklistUser(user).then(response => {
+        this.refresh();
+      });
+    }
   }
 
   unsubscribeUser(username: string) {
@@ -143,7 +147,7 @@ export class UserSubscriptionsComponent implements OnInit {
   }
 
   selectedBlacklistedUser(event: MatAutocompleteSelectedEvent): void {
-    this.subscribeUser(event.option.viewValue);
+    this.blacklistUser(event.option.viewValue);
   }
 
 }

@@ -9,13 +9,13 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
           <input placeholder="..."
-                [matAutocomplete]="auto"
+                [matAutocomplete]="autoSubscribeUser"
                 [matChipInputFor]="chipListSubscribeUser"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
                 (matChipInputTokenEnd)="addSubscribedUser($event)">
         </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSubscribedUser($event)">
+        <mat-autocomplete #autoSubscribeUser="matAutocomplete" (optionSelected)="selectedSubscribedUser($event)">
 			<mat-option *ngFor="let user of allUsers" [value]="user">
 				{{user}}
 			</mat-option>
@@ -33,13 +33,13 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
           <input placeholder="..."
-                [matAutocomplete]="auto"
+                [matAutocomplete]="autoBlacklistUser"
                 [matChipInputFor]="chipListBlacklistUser"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
                 (matChipInputTokenEnd)="addBlacklistedUser($event)">
         </mat-chip-list>
-		<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedBlacklistedUser($event)">
+		<mat-autocomplete #autoBlacklistUser="matAutocomplete" (optionSelected)="selectedBlacklistedUser($event)">
 			<mat-option *ngFor="let user of allUsers" [value]="user">
 				{{user}}
 			</mat-option>
