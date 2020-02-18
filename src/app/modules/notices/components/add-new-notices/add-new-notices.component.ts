@@ -50,7 +50,9 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.addNewNoticesForm.valid && this.tagsAreNotEmpty()) {
-      alert(JSON.stringify(this.addNewNoticesForm.value));
+      const formValue = this.addNewNoticesForm.value;
+      formValue.tags = this.tags;
+      alert(JSON.stringify(formValue));
     }
   }
 
