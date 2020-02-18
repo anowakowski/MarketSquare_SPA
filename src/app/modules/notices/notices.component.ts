@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/app/services/user.service";
+import { Tag } from 'src/app/models/tag';
+import { NoticeService } from './services/notice.service';
 
 @Component({
   selector: "app-notices",
@@ -7,7 +9,7 @@ import { UserService } from "src/app/services/user.service";
   styleUrls: ["./notices.component.css"]
 })
 export class NoticesComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private noticeService: NoticeService) {}
 
   ngOnInit() {}
 
@@ -17,8 +19,7 @@ export class NoticesComponent implements OnInit {
     });
   }
 
-  selectedTagsChanged(currentTags: string[]) {
-    console.log('Tags changed: ' + JSON.stringify(currentTags));
-
+  selectedTagsChanged(currentTags: Tag[]) {
+    this.noticeService.changeTags(currentTags);
   }
 }
