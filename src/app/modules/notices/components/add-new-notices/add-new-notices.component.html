@@ -29,8 +29,14 @@
                      [matChipInputFor]="chipList"
                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                      [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addTag($event)">
+                     (matChipInputTokenEnd)="addTag($event)"
+                     [matAutocomplete]="autocomplete">
             </mat-chip-list>
+            <mat-autocomplete #autocomplete="matAutocomplete" (optionSelected)="optionSelected($event)">
+              <mat-option *ngFor="let tag of availableTags" [value]="tag">
+                {{tag.name}}
+              </mat-option>
+            </mat-autocomplete>
             <div>
               <div *ngIf="tagsAreNotEmpty() === false" class="invalid-feedback-tags">Notices Tags is required</div>
             </div>

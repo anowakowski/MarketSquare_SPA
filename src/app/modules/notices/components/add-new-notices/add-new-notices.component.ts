@@ -4,6 +4,7 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Tag } from "src/app/models/tag";
 import { TagService } from 'src/app/services/tag.service';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: "app-add-new-notices",
@@ -18,6 +19,12 @@ export class AddNewNoticesComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   tags: Tag[] = [
+    { name: "#Food", id: 1 },
+    { name: "#Honey", id: 2 },
+    { name: "#Game", id: 3 }
+  ];
+
+  availableTags: Tag[] = [
     { name: "#Food", id: 1 },
     { name: "#Honey", id: 2 },
     { name: "#Game", id: 3 }
@@ -57,6 +64,9 @@ export class AddNewNoticesComponent implements OnInit {
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
+  }
+
+  optionSelected(event: MatAutocompleteSelectedEvent) {
   }
 
   tagsAreNotEmpty(): boolean {
