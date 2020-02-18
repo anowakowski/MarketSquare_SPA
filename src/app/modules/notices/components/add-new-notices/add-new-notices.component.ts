@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { Tag } from "src/app/models/tag";
 import { TagService } from 'src/app/services/tag.service';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 
 @Component({
   selector: "app-add-new-notices",
@@ -31,6 +31,11 @@ export class AddNewNoticesComponent implements OnInit {
     description: new FormControl("", Validators.required)
   });
 
+  public tagControl = new FormControl();
+
+  @ViewChild('tagInput', { static: false }) tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('autocomplete', { static: false }) autocomplete: MatAutocomplete;
+
   constructor(private tagService: TagService) {}
 
   ngOnInit() {
@@ -44,16 +49,21 @@ export class AddNewNoticesComponent implements OnInit {
   }
 
   addTag(event: MatChipInputEvent): void {
+    console.log("addTag ");
+    console.log(event);
+
     const input = event.input;
     const value = event.value;
 
-    if ((value || "").trim()) {
+    if ((value || "").trim() && !this.autocomplete.isOpen) {
       this.tags.push({ name: value.trim(), id: 1 });
     }
 
     if (input) {
       input.value = "";
     }
+
+    this.tagControl.setValue(null);
   }
 
   removeTag(fruit: Tag): void {
@@ -65,6 +75,12 @@ export class AddNewNoticesComponent implements OnInit {
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent) {
+    console.log("optionSelected ");
+    console.log(event);
+
+    this.tags.push(event.option.value);
+    this.tagInput.nativeElement.value = '';
+    this.tagControl.setValue(null);
   }
 
   tagsAreNotEmpty(): boolean {
