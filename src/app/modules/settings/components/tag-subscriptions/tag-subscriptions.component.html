@@ -1,5 +1,5 @@
-<div class="jumbotron">
-<h5>Subscribed tags:</h5>
+<div>
+
 
 <mat-form-field class="example-chip-list">
     <mat-chip-list #chipListSubscribeTag aria-label="Tags selection">
@@ -8,7 +8,7 @@
         {{tag}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
-      <input placeholder="..."
+      <input placeholder="add tag to subscribe"
             [matAutocomplete]="autoSubscribeTag"
             [matChipInputFor]="chipListSubscribeTag"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -24,15 +24,14 @@
     </div>
 </mat-form-field>
 
-<h5>Blacklisted tags:</h5>
-<mat-form-field class="example-chip-list">
+<mat-form-field class="example-chip-list" style="margin-top: 20px;">
     <mat-chip-list #chipListBlacklistTag aria-label="Tags selection">
       <mat-chip *ngFor="let tag of blacklistedTags" [selectable]="selectable"
                [removable]="removable" (removed)="removeBlacklistedTag(tag)">
         {{tag}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
-      <input placeholder="..."
+      <input placeholder="add tag to unsubscribe"
             [matAutocomplete]="autoBlacklistTag"
             [matChipInputFor]="chipListBlacklistTag"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
