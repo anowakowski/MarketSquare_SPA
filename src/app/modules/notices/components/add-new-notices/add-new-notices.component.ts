@@ -40,7 +40,8 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.resetAvailableTagsList();
     this.subscription = this.tagControl.valueChanges.subscribe((value: string) => {
-      this.tagService.getTagsByName(value).then(tags => this.availableTags = tags);
+      this.tagService.getTagsByName(value).then(allTags => this.availableTags = allTags
+        .filter(tag => !this.tags.some(selectedTag => tag.id === selectedTag.id && tag.name === selectedTag.name)));
     });
   }
 
@@ -61,7 +62,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     const value = event.value;
 
     if ((value || "").trim() && !this.autocomplete.isOpen) {
-      this.tags.push({ name: value.trim(), id: 1 });
+      this.tags.push({ name: value.trim(), id: 0 });
     }
 
     if (input) {
@@ -98,6 +99,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   }
 
   private resetAvailableTagsList() {
-    this.tagService.getAllTags().then(tags => this.availableTags = tags);
+    this.tagService.getAllTags().then(allTags => this.availableTags = allTags
+      .filter(tag => !this.tags.some(selectedTag => tag.id === selectedTag.id && tag.name === selectedTag.name)));
   }
 }
