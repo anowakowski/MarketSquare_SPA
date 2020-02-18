@@ -43,7 +43,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.tagService.getAllTags().then(tags => this.availableTags = tags);
+    this.resetAvailableTagsList();
     this.subscription = this.tagControl.valueChanges.subscribe((value: string) => {
       this.tagService.getTagsByName(value).then(tags => this.availableTags = tags);
     });
@@ -72,6 +72,8 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     }
 
     this.tagControl.setValue(null);
+
+    this.resetAvailableTagsList();
   }
 
   removeTag(fruit: Tag): void {
@@ -86,6 +88,8 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     this.tags.push(event.option.value);
     this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
+
+    this.resetAvailableTagsList();
   }
 
   tagsAreNotEmpty(): boolean {
@@ -94,5 +98,9 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
 
   submitDisabled(): boolean {
     return !(this.addNewNoticesForm.valid && this.tagsAreNotEmpty());
+  }
+
+  private resetAvailableTagsList() {
+    this.tagService.getAllTags().then(tags => this.availableTags = tags);
   }
 }
