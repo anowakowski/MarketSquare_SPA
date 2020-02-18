@@ -6,3 +6,21 @@
     margin-left: 10px;
     color: black;
 }
+
+.card {
+    background-color: #5ede7f;
+}
+
+.btn-link {
+    color: #111111;
+    font-weight: bold;
+}
+
+.list-tag {
+    color: #4c5b5f;
+    font-weight: bold;
+}
+
+.card-description {
+    background-color: #50c06c;
+}

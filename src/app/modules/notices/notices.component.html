@@ -15,11 +15,16 @@
       <div style="padding-bottom: 23px;">
         <button type="button" class="btn btn-secondary my-2 my-sm-0 float-right">Clear all tags <i class="fa fa-times"></i></button>
       </div>
-      
       <hr class="my-4">
       <app-tag-list class="w-100" (selectionChanged)="selectedTagsChanged($event)"></app-tag-list>
     </div>
     
-    <app-all-notices-list class="w-100"></app-all-notices-list>
+    <div class="jumbotron" style="width: 100%;">
+      <h3 >All Notices</h3>
+      <p class="lead">Choose the the notices to show detail</p>
+      <hr class="my-4">
+      <app-all-notices-list class="w-100"></app-all-notices-list>
+    </div>
+  
   </div>
 </div>
