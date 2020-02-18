@@ -33,7 +33,7 @@ export class AllNoticesListComponent implements OnInit {
 
   handleIncomingTags(incomingTags: Tag[]) {
     this.selectedTags = incomingTags;
-    console.log(`I've recieved ${this.selectedTags}`);
+    this.getAllNotices();
   }
 
   fillNotices() {
@@ -41,7 +41,6 @@ export class AllNoticesListComponent implements OnInit {
   }
 
   formatDate(date) {
-    //#TODO Actually format date ;)
     if (!date) {
       return '';
     }
