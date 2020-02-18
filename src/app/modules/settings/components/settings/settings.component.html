@@ -1,14 +1,23 @@
 
 <div class="container">
     <div class="row">
-      <div style="width:100%;">
-        <div class="jumbotron">
-            <h1 class="display-4">Settings</h1>
-
-            <app-tag-subscriptions></app-tag-subscriptions>
-            
-            <app-user-subscriptions></app-user-subscriptions>
-
+      <div class="jumbotron" style="width: 100%;">
+        <h1 class="display-4">Subscriptions Settings</h1>
+        <p class="lead">In this section you can add Tag or User to your subscribe or You can unsubscribe chosen user or Tag</p>
+        <hr class="my-4">
+        <div style="margin-top: 20px;">
+          <mat-tab-group>
+            <mat-tab label="Subscribed Tags">
+              <div style="margin-top: 30px;">
+                <app-tag-subscriptions></app-tag-subscriptions>
+              </div>
+            </mat-tab>
+            <mat-tab label="Subscribed Users">
+              <div style="margin-top: 30px;">
+                <app-user-subscriptions></app-user-subscriptions>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
     </div>
