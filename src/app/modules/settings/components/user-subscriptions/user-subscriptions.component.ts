@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { SettingsService } from '../../services/settings.service';
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
+import { Observable } from 'rxjs/internal/Observable';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
   selector: 'app-user-subscriptions',
@@ -20,6 +22,9 @@ export class UserSubscriptionsComponent implements OnInit {
   subscribedUsers: string[];
   blacklistedUsers: string[];
 
+  allUsers: string[];
+  filteredUsers: Observable<string[]>;
+
   @ViewChild('subscribeNameInput', {static: false}) subscribeNameInput: ElementRef;
   @ViewChild('blacklistNameInput', {static: false}) blacklistNameInput: ElementRef;
 
@@ -32,15 +37,25 @@ export class UserSubscriptionsComponent implements OnInit {
   refresh() {
     this.getBlacklistedUsers();
     this.getSubscribedUsers();
+    this.getAllUsers();
   }
+
+  getAllUsers() {
+    this.allUsers = ['kamil', 'Wojciech'];
+ }
 
   addSubscribedUser(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
     if ((value || "").trim()) {
-      this.subscribedUsers.push(value.trim());
-      this.subscribeUser(value.trim());
+      const v = value.trim();
+      if (this.allUsers.indexOf(v) > -1) {
+        this.subscribedUsers.push(v);
+        this.subscribeUser(v);
+      } else {
+        input.value = "";
+      }
     }
 
     if (input) {
@@ -63,8 +78,13 @@ export class UserSubscriptionsComponent implements OnInit {
     const value = event.value;
 
     if ((value || "").trim()) {
-      this.blacklistedUsers.push(value.trim());
-      this.blacklistUser(value.trim());
+      const v = value.trim();
+      if (this.allUsers.indexOf(v) > -1) {
+        this.blacklistedUsers.push(v);
+        this.blacklistUser(v);
+      } else {
+        input.value = "";
+      }
     }
 
     if (input) {
@@ -116,6 +136,14 @@ export class UserSubscriptionsComponent implements OnInit {
     this.settingsService.getBlacklistedUsers().then(response => {
       this.blacklistedUsers = response;
     });
+  }
+
+  selectedSubscribedUser(event: MatAutocompleteSelectedEvent): void {
+    this.subscribeUser(event.option.viewValue);
+  }
+
+  selectedBlacklistedUser(event: MatAutocompleteSelectedEvent): void {
+    this.subscribeUser(event.option.viewValue);
   }
 
 }

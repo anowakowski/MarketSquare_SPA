@@ -8,12 +8,18 @@
             {{user}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input placeholder=""
-                 [matChipInputFor]="chipListSubscribeUser"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="addSubscribedUser($event)">
+          <input placeholder="..."
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipListSubscribeUser"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addSubscribedUser($event)">
         </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSubscribedUser($event)">
+			<mat-option *ngFor="let user of allUsers" [value]="user">
+				{{user}}
+			</mat-option>
+		</mat-autocomplete>
         <div>
         </div>
     </mat-form-field>
@@ -26,12 +32,18 @@
             {{user}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input placeholder=""
-                 [matChipInputFor]="chipListBlacklistUser"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="addBlacklistedUser($event)">
+          <input placeholder="..."
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipListBlacklistUser"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addBlacklistedUser($event)">
         </mat-chip-list>
+		<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedBlacklistedUser($event)">
+			<mat-option *ngFor="let user of allUsers" [value]="user">
+				{{user}}
+			</mat-option>
+		</mat-autocomplete>
         <div>
         </div>
     </mat-form-field>
