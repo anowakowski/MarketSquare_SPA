@@ -24,7 +24,7 @@ export class TagSubscriptionsComponent implements OnInit {
   blacklistedTags: string[];
 
   allTags: string[];
-  filteredTags: Observable<string[]>;
+  filteredTags: string[];
 
   @ViewChild('subscribeNameInput', {static: false}) subscribeNameInput: ElementRef;
   @ViewChild('blacklistNameInput', {static: false}) blacklistNameInput: ElementRef;
@@ -41,8 +41,17 @@ export class TagSubscriptionsComponent implements OnInit {
     this.getAllTags();
   }
 
+  refreshFiltered() {
+    if (this.allTags !== undefined && this.subscribedTags !== undefined && this.blacklistedTags !== undefined) {
+      this.filteredTags = this.allTags.filter(n => !this.subscribedTags.includes(n) && !this.blacklistedTags.includes(n));
+    }
+  }
+
   getAllTags() {
-    this.allTags = ['sprzedam'];
+    this.settingsService.getAllTags().then(response => {
+      this.allTags = response.map(u => u.name);
+      this.refreshFiltered();
+    });
  }
 
   addSubscribedTag(event: MatChipInputEvent): void {
@@ -51,9 +60,10 @@ export class TagSubscriptionsComponent implements OnInit {
 
     if ((value || "").trim()) {
       const v = value.trim();
-      if (this.allTags.indexOf(v) > -1 && this.blacklistedTags.indexOf(v) < 0 && this.subscribedTags.indexOf(v) < 0) {
-        this.subscribedTags.push(v);
+      if (this.filteredTags.indexOf(v) > -1) {
         this.subscribeTag(v);
+        this.subscribedTags.push(v);        
+        this.refreshFiltered();
       } else {
         input.value = "";
       }
@@ -80,9 +90,10 @@ export class TagSubscriptionsComponent implements OnInit {
 
     if ((value || "").trim()) {
       const v = value.trim();
-      if (this.allTags.indexOf(v) > -1 && this.blacklistedTags.indexOf(v) < 0 && this.subscribedTags.indexOf(v) < 0) {
-        this.blacklistedTags.push(v);
+      if (this.filteredTags.indexOf(v) > -1) {
         this.blacklistTag(v);
+        this.blacklistedTags.push(v);
+        this.refreshFiltered();
       } else {
         input.value = "";
       }
@@ -134,12 +145,14 @@ export class TagSubscriptionsComponent implements OnInit {
   getSubscribedTags() {
     this.settingsService.getSubscribedTags().then(response => {
       this.subscribedTags = response;
+      this.refreshFiltered();
     });
   }
 
   getBlacklistedTags() {
     this.settingsService.getBlacklistedTags().then(response => {
       this.blacklistedTags = response;
+      this.refreshFiltered();
     });
   }
 
