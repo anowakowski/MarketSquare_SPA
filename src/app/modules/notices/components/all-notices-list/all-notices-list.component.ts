@@ -13,7 +13,7 @@ export class AllNoticesListComponent implements OnInit {
   selectedTags: Tag[];
 
   constructor(private noticeService: NoticeService) {
-    this.fillNotices();
+
   }
 
   ngOnInit() {
@@ -34,10 +34,6 @@ export class AllNoticesListComponent implements OnInit {
   handleIncomingTags(incomingTags: Tag[]) {
     this.selectedTags = incomingTags;
     this.getAllNotices();
-  }
-
-  fillNotices() {
-
   }
 
   formatDate(date) {

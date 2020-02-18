@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Notice } from 'src/app/models/Notice';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Component({
   selector: 'app-subscriptions-list',
@@ -8,10 +9,19 @@ import { Notice } from 'src/app/models/Notice';
 })
 export class SubscriptionsListComponent implements OnInit {
   notices: Notice[];
-  constructor() { }
+  constructor(private subscriptionService: SubscriptionService) { }
 
   ngOnInit() {
-    this.notices = [];
+    this.getSubscribedNotices();
+  }
+
+  getSubscribedNotices(){
+      this.subscriptionService.getSubscribedNotices().then(response => {
+        if(response && response.length > 0){
+          this.notices = response.map(o => o.notice);
+          console.log(this.notices);
+        }
+      });
   }
 
   formatDate(date) {
