@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Tag } from 'src/app/models/tag';
 
 @Component({
   selector: 'app-tag',
@@ -7,11 +8,11 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class TagComponent implements OnInit {
 
-  @Input() public tagName: string;
+  @Input() public tag: Tag;
 
-  @Output() public checked = new EventEmitter<string>();
+  @Output() public checked = new EventEmitter<Tag>();
 
-  @Output() public unchecked = new EventEmitter<string>();
+  @Output() public unchecked = new EventEmitter<Tag>();
 
   private isChecked = false;
 
@@ -24,9 +25,9 @@ export class TagComponent implements OnInit {
     this.isChecked = !this.isChecked;
 
     if (this.isChecked) {
-      this.checked.emit(this.tagName);
+      this.checked.emit(this.tag);
     } else {
-      this.unchecked.emit(this.tagName);
+      this.unchecked.emit(this.tag);
     }
   }
 }
