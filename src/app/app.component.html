@@ -1,12 +1,14 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
   <div class="container">
-    <a href="#" class="navbar-brand">Market Square <i class="fa fa-shopping-basket"></i></a>
+    <a [routerLink]="['/']" class="navbar-brand">Market Square <i class="fa fa-shopping-basket"></i></a>
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="d-none d-sm-block">
       <button [routerLink]="['/add-new-notices']" type="button" class="btn btn-success my-2 my-sm-0">Added new notices <i class="fa fa-plus"></i></button>
+      <button [routerLink]="['/settings']" type="button" class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">Settings <i class="fa fa-cog fa-1x" ></i></button>
     </div>
+
   </div>
 </nav>
 <div style="margin-top: 55px;">
