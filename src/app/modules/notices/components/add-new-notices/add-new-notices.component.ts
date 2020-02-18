@@ -6,6 +6,7 @@ import { Tag } from "src/app/models/tag";
 import { TagService } from 'src/app/services/tag.service';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { Subscription } from 'rxjs';
+import { NoticeService } from '../../services/notice.service';
 
 @Component({
   selector: "app-add-new-notices",
@@ -34,13 +35,14 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   @ViewChild('autocomplete', { static: false }) autocomplete: MatAutocomplete;
   subscription: Subscription;
 
-  constructor(private tagService: TagService) {
+  constructor(private tagService: TagService, private noticeService: NoticeService) {
   }
 
   ngOnInit() {
     this.resetAvailableTagsList();
     this.subscription = this.tagControl.valueChanges.subscribe((value: string) => {
-      this.tagService.getTagsByName(value).then(tags => this.availableTags = tags);
+      this.tagService.getTagsByName(value).then(allTags => this.availableTags = allTags
+        .filter(tag => !this.tags.some(selectedTag => tag.id === selectedTag.id && tag.name === selectedTag.name)));
     });
   }
 
@@ -52,7 +54,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     if (this.addNewNoticesForm.valid && this.tagsAreNotEmpty()) {
       const formValue = this.addNewNoticesForm.value;
       formValue.tags = this.tags;
-      alert(JSON.stringify(formValue));
+      this.noticeService.addNotice(formValue);
     }
   }
 
@@ -61,7 +63,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     const value = event.value;
 
     if ((value || "").trim() && !this.autocomplete.isOpen) {
-      this.tags.push({ name: value.trim(), id: 1 });
+      this.tags.push({ name: value.trim(), id: 0 });
     }
 
     if (input) {
@@ -98,6 +100,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   }
 
   private resetAvailableTagsList() {
-    this.tagService.getAllTags().then(tags => this.availableTags = tags);
+    this.tagService.getAllTags().then(allTags => this.availableTags = allTags
+      .filter(tag => !this.tags.some(selectedTag => tag.id === selectedTag.id && tag.name === selectedTag.name)));
   }
 }

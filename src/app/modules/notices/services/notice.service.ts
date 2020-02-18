@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { NewNotice } from 'src/app/models/new-notice';
 import { BehaviorSubject } from 'rxjs';
 import { Tag } from 'src/app/models/tag';
 
@@ -30,5 +31,9 @@ export class NoticeService {
       .get<any>("https://localhost:5001/api/notices/getAllNotices", {params: this.getNoticeHttpParams()})
       .toPromise()
       .then(response => response);
+  }
+
+  addNotice(notice: NewNotice) {
+    this.httpClient.post<any>("https://localhost:5001/api/notices/addNotice", notice).subscribe(data => console.log(data));
   }
 }
