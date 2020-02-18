@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'sub',
+    path: 'subscriptions',
     loadChildren: '../app/modules/subscriptions/subscriptions.module#SubscriptionsModule'
   },
   {
