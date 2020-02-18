@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-
+import { Notice } from "src/app/models/Notice";
 import { NoticeService } from '../../services/notice.service';
-import { Notice } from 'src/app/models/Notice';
+import { Tag } from 'src/app/models/tag';
 
 @Component({
   selector: "app-all-notices-list",
@@ -10,11 +10,14 @@ import { Notice } from 'src/app/models/Notice';
 })
 export class AllNoticesListComponent implements OnInit {
   notices: Notice[];
+  selectedTags: Tag[];
+
   constructor(private noticeService: NoticeService) {
     this.fillNotices();
   }
 
   ngOnInit() {
+    this.subscribeIncomingTags();
     this.getAllNotices();
   }
 
@@ -24,13 +27,25 @@ export class AllNoticesListComponent implements OnInit {
     });
   }
 
+  subscribeIncomingTags() {
+    this.noticeService.currentTags.subscribe(incomingTags => this.handleIncomingTags(incomingTags));
+  }
+
+  handleIncomingTags(incomingTags: Tag[]) {
+    this.selectedTags = incomingTags;
+    console.log(`I've recieved ${this.selectedTags}`);
+  }
+
   fillNotices() {
 
   }
 
   formatDate(date) {
-    return date;
     //#TODO Actually format date ;)
+    if(!date){
+      return '';
+    }
+    date = new Date(Date.parse(date));
     const monthNames = [
       "January", "February", "March",
       "April", "May", "June", "July",
