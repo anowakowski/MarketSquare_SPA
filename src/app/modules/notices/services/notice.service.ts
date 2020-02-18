@@ -16,12 +16,11 @@ export class NoticeService {
 
   getNoticeHttpParams(): HttpParams {
     let httpParams = new HttpParams();
-    let tags = this.tagsSource.value
-                .map(x => x.id)
-                .forEach(x => httpParams = httpParams
-                  .set('tags', x.toString()));
+    this.tagsSource.value
+                .forEach(x => httpParams = httpParams.append('tags', x.id.toString()));
     return httpParams;
   }
+
   changeTags(tags: Tag[]) {
     this.tagsSource.next(tags);
   }
