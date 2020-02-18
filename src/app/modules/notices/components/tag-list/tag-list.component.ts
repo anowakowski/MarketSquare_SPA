@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TagService } from 'src/app/services/tag.service';
+import { Tag } from 'src/app/models/tag';
 
 @Component({
   selector: 'app-tag-list',
@@ -8,11 +9,11 @@ import { TagService } from 'src/app/services/tag.service';
 })
 export class TagListComponent implements OnInit {
 
-  private selectedTags: string[] = [];
+  private selectedTags: Tag[] = [];
 
-  @Output() selectionChanged = new EventEmitter<string[]>();
+  @Output() selectionChanged = new EventEmitter<Tag[]>();
 
-  public availableTags: string[] = [];
+  public availableTags: Tag[] = [];
 
   constructor(private tagService: TagService) { }
 
@@ -20,13 +21,13 @@ export class TagListComponent implements OnInit {
     this.tagService.getAllTags().then(tags => this.availableTags = tags);
   }
 
-  checked(tagName: string) {
-    this.selectedTags.push(tagName);
+  checked(tag: Tag) {
+    this.selectedTags.push(tag);
     this.notifyObservers();
   }
 
-  unchecked(tagName: string) {
-    const index: number = this.selectedTags.indexOf(tagName, 0);
+  unchecked(tag: Tag) {
+    const index: number = this.selectedTags.indexOf(tag, 0);
     if (index > -1) {
       this.selectedTags.splice(index, 1);
       this.notifyObservers();
