@@ -24,20 +24,18 @@ export class AddNewNoticesComponent implements OnInit {
     { name: "#Game", id: 3 }
   ];
 
-  availableTags: Tag[] = [
-    { name: "#Food", id: 1 },
-    { name: "#Honey", id: 2 },
-    { name: "#Game", id: 3 }
-  ];
+  availableTags: Tag[] = [];
 
   public addNewNoticesForm = new FormGroup({
     name: new FormControl("", Validators.required),
     description: new FormControl("", Validators.required)
   });
 
-  constructor() {}
+  constructor(private tagService: TagService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tagService.getAllTags().then(tags => this.availableTags = tags);
+  }
 
   onSubmit() {
     if (this.addNewNoticesForm.valid && this.tagsAreNotEmpty()) {
