@@ -62,12 +62,16 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
     const input = event.input;
     const value = event.value;
 
-    if ((value || "").trim() && !this.autocomplete.isOpen) {
-      this.tags.push({ name: value.trim(), id: 0 });
-    }
-
-    if (input) {
-      input.value = "";
+    const v = (value || "").trim();
+    if (v) {
+      if (this.tags.map(t => t.name).indexOf(v) < 0) {
+        this.tags.push({ name: v, id: 0 });
+        input.value = "";
+      } else {
+        if (input) {
+          input.value = "";
+        }
+      }
     }
 
     this.tagControl.setValue(null);
@@ -86,7 +90,6 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   optionSelected(event: MatAutocompleteSelectedEvent) {
     this.tags.push(event.option.value);
     this.tagInput.nativeElement.value = '';
-    this.tagControl.setValue(null);
 
     this.resetAvailableTagsList();
   }
