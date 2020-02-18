@@ -42,7 +42,7 @@ export class AllNoticesListComponent implements OnInit {
 
   formatDate(date) {
     //#TODO Actually format date ;)
-    if(!date){
+    if (!date) {
       return '';
     }
     date = new Date(Date.parse(date));
