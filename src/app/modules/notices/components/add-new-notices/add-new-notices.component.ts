@@ -64,6 +64,6 @@ export class AddNewNoticesComponent implements OnInit {
   }
 
   submitDisabled(): boolean {
-    return !this.addNewNoticesForm.valid;
+    return !(this.addNewNoticesForm.valid && this.tagsAreNotEmpty());
   }
 }
