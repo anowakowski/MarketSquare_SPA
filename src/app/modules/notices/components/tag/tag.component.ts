@@ -14,7 +14,7 @@ export class TagComponent implements OnInit {
 
   @Output() public unchecked = new EventEmitter<Tag>();
 
-  private isChecked = false;
+  public isChecked = false;
 
   constructor() { }
 
