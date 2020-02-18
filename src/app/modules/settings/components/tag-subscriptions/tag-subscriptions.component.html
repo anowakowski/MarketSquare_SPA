@@ -1,63 +1,51 @@
+<div class="jumbotron">
 <h5>Subscribed tags:</h5>
 
-
-<div class="panel panel-primary">
-    <div class="panel-heading">Subscribe tag:</div>
-    <div class="panel-body">
-
-
-        <form (submit)="subscribeTag()">
-            <div class="form-group-sm row">
-        
-                <label class="col-sm-4 col-form-label-sm">Name</label>
-        
-                <input type="text" #subscribeNameInput class="form-control form-control-sm col-sm-2"/>        
-                
-            </div>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">Add</button>
-            
-        </form>
-
+<mat-form-field class="example-chip-list">
+    <mat-chip-list #chipListSubscribeTag aria-label="Tags selection">
+      <mat-chip *ngFor="let tag of subscribedTags" [selectable]="selectable"
+               [removable]="removable" (removed)="removeSubscribedTag(tag)">
+        {{tag}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="..."
+            [matAutocomplete]="autoSubscribeTag"
+            [matChipInputFor]="chipListSubscribeTag"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addSubscribedTag($event)">
+    </mat-chip-list>
+    <mat-autocomplete #autoSubscribeTag="matAutocomplete" (optionSelected)="selectedSubscribedTag($event)">
+        <mat-option *ngFor="let tag of filteredTags" [value]="tag">
+            {{tag}}
+        </mat-option>
+    </mat-autocomplete>
+    <div>
     </div>
-  </div>
-
-  <div *ngFor="let item of subscribedTags">
-    <form (submit)="unsubscribeTag(item)">
-        <div class="form-group-sm row">
-            <label class="col-sm-4 col-form-label-sm">{{item}}</label>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">x</button>
-        </div>
-    </form>
-  </div>
+</mat-form-field>
 
 <h5>Blacklisted tags:</h5>
-
-<div class="panel panel-primary">
-    <div class="panel-heading">Blacklist tag:</div>
-    <div class="panel-body">
-
-
-        <form (submit)="blacklistTag()">
-            <div class="form-group-sm row">
-        
-                <label class="col-sm-4 col-form-label-sm">Name</label>
-        
-                <input type="text" #blacklistNameInput class="form-control form-control-sm col-sm-2"/>        
-                
-            </div>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">Add</button>
-            
-        </form>
-
+<mat-form-field class="example-chip-list">
+    <mat-chip-list #chipListBlacklistTag aria-label="Tags selection">
+      <mat-chip *ngFor="let tag of blacklistedTags" [selectable]="selectable"
+               [removable]="removable" (removed)="removeBlacklistedTag(tag)">
+        {{tag}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="..."
+            [matAutocomplete]="autoBlacklistTag"
+            [matChipInputFor]="chipListBlacklistTag"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addBlacklistedTag($event)">
+    </mat-chip-list>
+    <mat-autocomplete #autoBlacklistTag="matAutocomplete" (optionSelected)="selectedBlacklistedTag($event)">
+        <mat-option *ngFor="let tag of filteredTags" [value]="tag">
+            {{tag}}
+        </mat-option>
+    </mat-autocomplete>
+    <div>
     </div>
-  </div>
+</mat-form-field>
 
-  <div *ngFor="let item of blacklistedTags">
-
-    <form (submit)="unblacklistTag(item)">
-        <div class="form-group-sm row">
-            <label class="col-sm-4 col-form-label-sm">{{item}}</label>
-            <button type="submit" class="btn btn-sm btn-primary form-control-sm col-sm-1">x</button>
-        </div>
-    </form>
-  </div>
+</div>

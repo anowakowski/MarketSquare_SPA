@@ -11,6 +11,20 @@ export class SettingsService {
     return new HttpParams().set('username', 'kamil');
   }
 
+  getAllUsers(): Promise<any> {
+    return this.httpClient
+      .get<any>("https://localhost:5001/api/users/getAllUsers")
+      .toPromise()
+      .then(response => response);
+  }
+  
+  getAllTags(): Promise<any> {
+    return this.httpClient
+      .get<any>("https://localhost:5001/api/tags/getAllTags")
+      .toPromise()
+      .then(response => response);
+  }
+
   subscribeUser(username: string) {
     return this.httpClient
     .get<any>("https://localhost:5001/api/settings/subscribeUser",

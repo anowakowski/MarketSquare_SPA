@@ -3,11 +3,6 @@
     <div class="jumbotron">
       <h1 class="display-4">All Notices</h1>
       <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-      <hr class="my-4">
-      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-      <p class="lead">
-        <button [routerLink]="['/add-new-notices']" type="button" class="btn btn-success my-2 my-sm-0">Added new notices <i class="fa fa-plus"></i></button>
-      </p>
     </div>
     <div class="jumbotron" style="width: 100%;">
       <h3 >All tags for filer Notices</h3>
@@ -15,11 +10,16 @@
       <div style="padding-bottom: 23px;">
         <button type="button" class="btn btn-secondary my-2 my-sm-0 float-right">Clear all tags <i class="fa fa-times"></i></button>
       </div>
-      
       <hr class="my-4">
       <app-tag-list class="w-100" (selectionChanged)="selectedTagsChanged($event)"></app-tag-list>
     </div>
     
-    <app-all-notices-list class="w-100"></app-all-notices-list>
+    <div class="jumbotron" style="width: 100%;">
+      <h3 >All Notices</h3>
+      <p class="lead">Choose the the notices to show detail</p>
+      <hr class="my-4">
+      <app-all-notices-list class="w-100"></app-all-notices-list>
+    </div>
+  
   </div>
 </div>

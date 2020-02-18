@@ -1,5 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { ElementRef, EventEmitter, Component, OnInit, ViewChild, Output } from '@angular/core';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { SettingsService } from '../../services/settings.service';
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { Observable } from 'rxjs/internal/Observable';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
+
 
 @Component({
   selector: 'app-tag-subscriptions',
@@ -8,8 +14,17 @@ import { SettingsService } from '../../services/settings.service';
 })
 export class TagSubscriptionsComponent implements OnInit {
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   subscribedTags: string[];
   blacklistedTags: string[];
+
+  allTags: string[];
+  filteredTags: string[];
 
   @ViewChild('subscribeNameInput', {static: false}) subscribeNameInput: ElementRef;
   @ViewChild('blacklistNameInput', {static: false}) blacklistNameInput: ElementRef;
@@ -23,20 +38,96 @@ export class TagSubscriptionsComponent implements OnInit {
   refresh() {
     this.getBlacklistedTags();
     this.getSubscribedTags();
+    this.getAllTags();
   }
 
-  subscribeTag() {
-    const subscribedTag = this.subscribeNameInput.nativeElement.value;
-    this.settingsService.subscribeTag(subscribedTag).then(response => {
-      this.refresh();
-    });
+  refreshFiltered() {
+    if (this.allTags !== undefined && this.subscribedTags !== undefined && this.blacklistedTags !== undefined) {
+      this.filteredTags = this.allTags.filter(n => !this.subscribedTags.includes(n) && !this.blacklistedTags.includes(n));
+    }
   }
 
-  blacklistTag() {
-    const subscribedTag = this.blacklistNameInput.nativeElement.value;
-    this.settingsService.blacklistTag(subscribedTag).then(response => {
-      this.refresh();
+  getAllTags() {
+    this.settingsService.getAllTags().then(response => {
+      this.allTags = response.map(u => u.name);
+      this.refreshFiltered();
     });
+ }
+
+  addSubscribedTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      const v = value.trim();
+      if (this.filteredTags.indexOf(v) > -1) {
+        this.subscribeTag(v);
+        this.subscribedTags.push(v);        
+        this.refreshFiltered();
+      } else {
+        input.value = "";
+      }
+    }
+
+    if (input) {
+      input.value = "";
+    }
+  }
+
+  removeSubscribedTag(tag: string): void {
+    const index = this.subscribedTags.indexOf(tag);
+
+    if (index >= 0) {
+      this.subscribedTags.splice(index, 1);
+    }
+
+    this.unsubscribeTag(tag);
+  }
+
+  addBlacklistedTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim()) {
+      const v = value.trim();
+      if (this.filteredTags.indexOf(v) > -1) {
+        this.blacklistTag(v);
+        this.blacklistedTags.push(v);
+        this.refreshFiltered();
+      } else {
+        input.value = "";
+      }
+    }
+
+    if (input) {
+      input.value = "";
+    }
+  }
+
+  removeBlacklistedTag(tag: string): void {
+    const index = this.blacklistedTags.indexOf(tag);
+
+    if (index >= 0) {
+      this.blacklistedTags.splice(index, 1);
+    }
+
+    this.unblacklistTag(tag);
+  }
+
+  subscribeTag(tag: string) {
+    if (this.blacklistedTags.indexOf(tag) < 0 && this.subscribedTags.indexOf(tag) < 0) {
+      this.settingsService.subscribeTag(tag).then(response => {
+        this.refresh();
+      });
+    }
+  }
+
+  blacklistTag(tag: string) {
+    if (this.blacklistedTags.indexOf(tag) < 0 && this.subscribedTags.indexOf(tag) < 0) {
+      this.settingsService.blacklistTag(tag).then(response => {
+        this.refresh();
+      });
+    }
   }
 
   unsubscribeTag(tag: string) {
@@ -54,13 +145,22 @@ export class TagSubscriptionsComponent implements OnInit {
   getSubscribedTags() {
     this.settingsService.getSubscribedTags().then(response => {
       this.subscribedTags = response;
+      this.refreshFiltered();
     });
   }
 
   getBlacklistedTags() {
     this.settingsService.getBlacklistedTags().then(response => {
       this.blacklistedTags = response;
+      this.refreshFiltered();
     });
   }
 
+  selectedSubscribedTag(event: MatAutocompleteSelectedEvent): void {
+    this.subscribeTag(event.option.viewValue);
+  }
+
+  selectedBlacklistedTag(event: MatAutocompleteSelectedEvent): void {
+    this.blacklistTag(event.option.viewValue);
+  }
 }
