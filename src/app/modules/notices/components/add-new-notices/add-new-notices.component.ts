@@ -5,8 +5,7 @@ import { MatChipInputEvent } from "@angular/material/chips";
 import { Tag } from "src/app/models/tag";
 import { TagService } from 'src/app/services/tag.service';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
-import { Observable, Subscription } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-add-new-notices",
@@ -20,11 +19,7 @@ export class AddNewNoticesComponent implements OnInit, OnDestroy {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  tags: Tag[] = [
-    { name: "#Food", id: 1 },
-    { name: "#Honey", id: 2 },
-    { name: "#Game", id: 3 }
-  ];
+  tags: Tag[] = [];
 
   availableTags: Tag[] = [];
 
