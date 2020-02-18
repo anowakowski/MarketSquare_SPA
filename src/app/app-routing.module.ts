@@ -3,6 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'sub',
+    loadChildren: '../app/modules/subscriptions/subscriptions.module#SubscriptionsModule'
+  },
+  {
     path: 'settings',
     loadChildren: '../app/modules/settings/settings.module#SettingsModule'
   },
