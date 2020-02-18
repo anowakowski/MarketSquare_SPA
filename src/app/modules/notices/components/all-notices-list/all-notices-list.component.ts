@@ -20,25 +20,28 @@ export class AllNoticesListComponent implements OnInit {
 
   getAllNotices() {
     this.noticeService.getAllNotices().then(response => {
-      const noticesTest = response;
-      console.log(noticesTest);
+      this.notices = response;
     });
   }
+
   fillNotices() {
 
   }
+
   formatDate(date) {
-  const monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-  ];
+    return date;
+    //#TODO Actually format date ;)
+    const monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
 
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
 
-  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
 }
