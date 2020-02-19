@@ -19,11 +19,11 @@
   
   </div>
 
-  <div *ngIf="auth.user$ | async; then authenticated else guest">
+<div *ngIf="auth.user$ | async; then authenticated else guest">
     <!-- template will replace this div -->
 </div>
 
-  <ng-template #guest>
+<ng-template #guest>
     <h3>Howdy, GUEST</h3>
     <p>Login to get started...</p>
     

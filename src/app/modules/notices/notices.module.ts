@@ -28,6 +28,6 @@ import { AuthService } from 'src/app/services/auth.service';
     TagComponent,
     TagListComponent
   ],
-  providers: [NoticeService, AuthService]
+  providers: [NoticeService]
 })
 export class NoticesModule { }
