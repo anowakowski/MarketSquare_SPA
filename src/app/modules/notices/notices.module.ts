@@ -10,6 +10,7 @@ import { TagComponent } from './components/tag/tag.component';
 import { TagListComponent } from './components/tag-list/tag-list.component';
 import { NoticeService } from './services/notice.service';
 import { MaterialModule } from 'src/app/shared/material/material.module';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @NgModule({
@@ -27,6 +28,6 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
     TagComponent,
     TagListComponent
   ],
-  providers: [NoticeService]
+  providers: [NoticeService, AuthService]
 })
 export class NoticesModule { }
