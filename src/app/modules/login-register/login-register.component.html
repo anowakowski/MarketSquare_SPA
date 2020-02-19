@@ -1,26 +1,52 @@
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home <i class="fa fa-home" aria-hidden="true"></i></a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add new norices</li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div style="width:100%;">
+      <div class="jumbotron">
+        <h1 class="display-4">Login or register</h1>
+        <hr class="my-4">
+        <form name="form" class=".loginform">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="email"
+              formControlName="name"
+              [ngClass]="{'is-invalid':addNewNoticesForm.get('name').touched && addNewNoticesForm.get('name').invalid}"
+              required />
+            <div class="invalid-feedback">
+              <div>e-mail</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="password"
+              formControlName="description"
+              [ngClass]="{'is-invalid':addNewNoticesForm.get('description').touched && addNewNoticesForm.get('description').invalid}"
+              required />
+            <div class="invalid-feedback">
+              <div>password</div>
+            </div>
+          </div>
 
-<div *ngIf="auth.user$ | async; then authenticated else guest">
-  <!-- template will replace this div -->
-</div>
+          <div class="form-group text-center" style="margin-top: 20px;">
+            <button class="btn btn-success" [disabled]="submitDisabled()">Login with mail</button>
+          </div>
 
-<ng-template #guest>
-  <h3>Howdy, GUEST</h3>
-  <p>Login to get started...</p>
+          <div class="or-seperator"><i>or</i></div>
 
-  
-  <button type="button" class="btn btn-primary" (click)="auth.googleSignin()">
-      <i class="fa fa-google"></i> Connect Google
-  </button>
+          <p class="text-center">Login with your social media account</p>
+        
 
-</ng-template>
+          <div class="text-center social-btn">
+            <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+            <a href="#" class="btn btn-info" style="margin-left: 5px;"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
+			      <a href="#" class="btn btn-danger" style="margin-left: 5px;" (click)="auth.googleSignin()"><i class="fa fa-google"></i>&nbsp; Google</a>
+        </div>
 
-
-<!-- User logged in -->
-<ng-template #authenticated>
-  <div *ngIf="auth.user$ | async as user">
-      <h3>Howdy, {{ user.displayName }}</h3>
-      <img  [src]="user.photoURL">
-      <p>UID: {{ user.uid }}</p>
-      <button (click)="auth.signOut()">Logout</button>
+        </form>
+      </div>
+    </div>
   </div>
-</ng-template>
+</div>
