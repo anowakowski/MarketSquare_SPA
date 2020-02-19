@@ -2,7 +2,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home <i class="fa fa-home" aria-hidden="true"></i></a></li>
-      <li class="breadcrumb-item active" aria-current="page">Add new norices</li>
+      <li class="breadcrumb-item active" aria-current="page">Login / Register</li>
     </ol>
   </nav>
   <div class="row">
@@ -13,25 +13,23 @@
         <form name="form" class=".loginform">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="email"
-              formControlName="name"
-              [ngClass]="{'is-invalid':addNewNoticesForm.get('name').touched && addNewNoticesForm.get('name').invalid}"
-              required />
+              
+              
+            />
             <div class="invalid-feedback">
               <div>e-mail</div>
             </div>
           </div>
           <div class="form-group">
             <input type="password" class="form-control" placeholder="password"
-              formControlName="description"
-              [ngClass]="{'is-invalid':addNewNoticesForm.get('description').touched && addNewNoticesForm.get('description').invalid}"
-              required />
+            />
             <div class="invalid-feedback">
               <div>password</div>
             </div>
           </div>
 
           <div class="form-group text-center" style="margin-top: 20px;">
-            <button class="btn btn-success" [disabled]="submitDisabled()">Login with mail</button>
+            <button class="btn btn-success">Login with mail</button>
           </div>
 
           <div class="or-seperator"><i>or</i></div>
