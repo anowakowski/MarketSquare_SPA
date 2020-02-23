@@ -7,7 +7,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbar-list-4">
-    <a style="margin-left: -20px;" class="nav-link"  id="navbarDropdownMenuLink" role="button" aria-haspopup="true" aria-expanded="false">
+    <a *ngIf="this.auth.authenticated" style="margin-left: -20px;" class="nav-link"  id="navbarDropdownMenuLink" role="button" aria-haspopup="true" aria-expanded="false">
       <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
     </a>
   </div>
@@ -21,6 +21,14 @@
       <button type="button" class="btn btn-danger my-2 my-sm-0" style="margin-left: 60px;" (click)="auth.signOut()">Sign Out <i class="fa fa-sign-out fa-1x" ></i></button>
     </div>
   </div>
+<div *ngIf="!this.auth.authenticated">
+  <div class="d-none d-sm-block">
+    <button [routerLink]="['/login']" type="button" class="btn btn-primary">
+      Sign In <i class="fa fa-sign-in fa-1x"></i>
+    </button>
+  </div>
+</div>
+
 
 </nav>
 <div style="margin-top: 10px;">
