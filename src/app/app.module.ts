@@ -8,17 +8,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+
+import { environment } from 'src/environments/environment';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

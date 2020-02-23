@@ -1,0 +1,31 @@
+.or-seperator {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid 
+    #ccc;
+}
+
+.or-seperator i {
+    padding: 0 10px;
+    background: 
+    #e9ecef;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}
+
+.loginform {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.social-btn {
+    margin: 10px 10px 10px 10px;
+    color: #ffffff;
+}
