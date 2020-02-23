@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { Observable, of, merge } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
 import { User } from '../models/user';
@@ -17,7 +17,6 @@ import { User } from '../models/user';
 export class AuthService {
 
   user$: Observable<any>;
-  public isLoggiedIn = false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -33,6 +32,10 @@ export class AuthService {
           }
         })
       );
+  }
+
+  get authenticated(): boolean {
+    return this.user$ !== null;
   }
 
   async googleSignin() {
@@ -51,19 +54,21 @@ export class AuthService {
       photoURL: user.photoURL
     };
 
-    const userSet = userRef.set(data, {merge: true});
-    this.setUserState();
-    return userSet;
+    return userRef.set(data, {merge: true});
   }
 
-  setUserState(): void {
-    this.afAuth.authState.subscribe(res => {
-      if (res && res.uid) {
-        this.isLoggiedIn = true;
-      }
-      this.isLoggiedIn = false;
-    });
+  isLoggedIn() {
+    return this.afAuth.authState.pipe(first()).toPromise();
   }
+
+  async userState() {
+    const user = await this.isLoggedIn();
+    if (user) {
+      return !user.uid;
+    } else {
+      return false;
+   }
+ }
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
