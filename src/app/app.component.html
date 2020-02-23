@@ -15,7 +15,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="#">Dashboard</a>
           <a class="dropdown-item" href="#">Edit Profile</a>
-          <a class="dropdown-item" href="#">Log Out</a>
+          <a class="dropdown-item" >Log Out</a>
         </div>
       </li>   
     </ul>
@@ -26,6 +26,7 @@
     </button>
     <button [routerLink]="['/add-new-notices']" type="button" class="btn btn-success my-2 my-sm-0" style="margin-left: 5px;">Added new notices <i class="fa fa-plus"></i></button>
     <button [routerLink]="['/settings']" type="button" class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;">Settings <i class="fa fa-cog fa-1x" ></i></button>
+    <button type="button" class="btn btn-secondary my-2 my-sm-0" style="margin-left: 5px;" (click)="auth.signOut()">Signout <i class="fa fa-cog fa-1x" ></i></button>
   </div>
 </nav>
 <div style="margin-top: 10px;">

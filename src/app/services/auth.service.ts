@@ -17,6 +17,7 @@ import { User } from '../models/user';
 export class AuthService {
 
   user$: Observable<any>;
+  public isLoggiedIn = false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -50,7 +51,18 @@ export class AuthService {
       photoURL: user.photoURL
     };
 
-    return userRef.set(data, {merge: true});
+    const userSet = userRef.set(data, {merge: true});
+    this.setUserState();
+    return userSet;
+  }
+
+  setUserState(): void {
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        this.isLoggiedIn = true;
+      }
+      this.isLoggiedIn = false;
+    });
   }
 
   signOut() {
