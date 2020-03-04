@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-login-register',
@@ -8,9 +11,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginRegisterComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  login() {
+    this.auth.googleSignin().then(() => {
+      this.router.navigate(['/']);
+    });
   }
 
 }
