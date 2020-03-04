@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginRegisterGuard } from './guards/login-register.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: '../app/modules/login-register/login-register.module#LoginRegisterModule'
+    loadChildren: '../app/modules/login-register/login-register.module#LoginRegisterModule',
+    canActivate: [LoginRegisterGuard]
   },
   {
     path: 'subscriptions',
